@@ -22,8 +22,8 @@ rtlsUtil = RtlsUtil(logging_file, RtlsUtilLoggingLevel.ALL)
 
 devices = [
     {"com_port": "COM73", "baud_rate": 460800, "name": "CC26x2 Master"},
-    {"com_port": "COM97", "baud_rate": 460800, "name": "CC26x2 Passive"},
-    {"com_port": "COM52", "baud_rate": 460800, "name": "CC26x2 Passive"}
+    {"com_port": "COM48", "baud_rate": 460800, "name": "CC26x2 Passive"},
+    {"com_port": "COM102", "baud_rate": 460800, "name": "CC26x2 Passive"}
 ]
 ## Setup devices
 master_node, passive_nodes, all_nodes = rtlsUtil.set_devices(devices)
@@ -39,7 +39,7 @@ print("Connection Success")
 
 
 
-end_loop_read = 30000
+end_loop_read = 3000
 
 
 
@@ -122,6 +122,10 @@ ax.imshow(img, extent=[-1.391/2,1.391/2,-1.75,1.75])
 plt.show()
 plt.xlabel('Y, м')
 plt.ylabel('X, м')
+plt.xlim(-5,5)
+plt.ylim(-3,3)
+plt.plot(-1*1.391/2, d/2-d/5, marker='o', markersize=5, color="blue", label='Антенна 1')
+plt.plot(-1*1.391/2, -d/2-d/5, marker='o', markersize=5, color="blue", label='Антенна 2')
 while i<=end_loop_read:
     try:
         i = i + 1
