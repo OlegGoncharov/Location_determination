@@ -13,7 +13,7 @@ from PIL import Image
 
 
 
-d = 1.47 # Расстояние между антеннами
+d = 1.12 # Расстояние между антеннами
 
 
 
@@ -22,7 +22,7 @@ rtlsUtil = RtlsUtil(logging_file, RtlsUtilLoggingLevel.ALL)
 
 devices = [
     {"com_port": "COM73", "baud_rate": 460800, "name": "CC26x2 Master"},
-    {"com_port": "COM48", "baud_rate": 460800, "name": "CC26x2 Passive"},
+    {"com_port": "COM99", "baud_rate": 460800, "name": "CC26x2 Passive"},
     {"com_port": "COM102", "baud_rate": 460800, "name": "CC26x2 Passive"}
 ]
 ## Setup devices
