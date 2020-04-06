@@ -20,16 +20,12 @@ for line in stroka2:
 measurements = np.column_stack((s1,s2))
 
 initial_state_mean = [measurements[0, 0],
-                      0,
-                      measurements[0, 1],
-                      0]
-transition_matrix = [[1, 1, 0, 0],
-                     [0, 1, 0, 0],
-                     [0, 0, 1, 1],
-                     [0, 0, 0, 1]]
+                      measurements[0, 1]]
+transition_matrix = [[1, 0],
+                     [0, 1]]
 
-observation_matrix = [[1, 0, 0, 0],
-                      [0, 0, 1, 0]]
+observation_matrix = [[1, 0],
+                      [0, 1]]
 
 kf1 = KalmanFilter(transition_matrices = transition_matrix,
                   observation_matrices = observation_matrix,
@@ -47,6 +43,16 @@ kf2 = KalmanFilter(transition_matrices = transition_matrix,
 kf2 = kf2.em(measurements, n_iter=5)
 (smoothed_state_means, smoothed_state_covariances)  = kf2.smooth(measurements)
 
+
+print("СКО до фильтрации координата X = " + str(np.std(measurements[:, 1])))
+print("СКО после фильтрации координата X = " + str(np.std(smoothed_state_means[:, 1])))
+
+print("СКО до фильтрации координата Y = " + str(np.std(measurements[:, 0])))
+print("СКО после фильтрации координата Y = " + str(np.std(smoothed_state_means[:, 0])))
+
+
+
+
 plt.figure(1)
 plt.xlabel("time, step")
 plt.ylabel("X, м")
@@ -60,13 +66,7 @@ plt.xlabel("time, step")
 plt.ylabel("Y, м")
 times = range(measurements.shape[0])
 plt.plot(times, measurements[:, 1], 'ro',
-         times, smoothed_state_means[:, 2], 'r--',)
+         times, smoothed_state_means[:, 1], 'r--',)
 plt.show()
-
-print("СКО до фильтрации координата X = " + str(np.std(measurements[:, 1])))
-print("СКО после фильтрации координата X = " + str(np.std(smoothed_state_means[:, 2])))
-
-print("СКО до фильтрации координата Y = " + str(np.std(measurements[:, 0])))
-print("СКО после фильтрации координата Y = " + str(np.std(smoothed_state_means[:, 0])))
 
 
